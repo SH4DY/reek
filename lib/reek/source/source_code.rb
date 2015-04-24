@@ -1,6 +1,7 @@
-old_verbose, $VERBOSE = $VERBOSE, nil
-require 'parser/current'
-$VERBOSE = old_verbose
+require_relative '../cli/utilities'
+Reek::CLI::Utilities.require_silently do
+  require 'parser/current'
+end
 require_relative '../core/tree_dresser'
 require_relative '../core/ast_node'
 

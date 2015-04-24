@@ -1,6 +1,7 @@
-old_verbose, $VERBOSE = $VERBOSE, nil
-require 'unparser'
-$VERBOSE = old_verbose
+require_relative '../cli/utilities'
+Reek::CLI::Utilities.require_silently do
+  require 'unparser'
+end
 
 module Reek
   module Sexp
