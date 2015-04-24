@@ -19,7 +19,7 @@ module Reek
       def self.parse(source)
         case source
         when Array
-          new 'dir', Source::SourceLocator.new(source).all_sources
+          new 'dir', Source::SourceLocator.new(source).sources
         when Source::SourceCode
           new source.desc, [source]
         else
