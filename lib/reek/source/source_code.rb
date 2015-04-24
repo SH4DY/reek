@@ -24,6 +24,15 @@ module Reek
         @parser      = parser
       end
 
+      # Initializes an instance of SourceCode given a source.
+      # This source can come via 3 different ways:
+      # - from files a la `reek lib/reek/`
+      # - from IO (STDIN) a la `echo "class Foo; end" | reek`
+      # - from String via our rspec matchers a la `expect("class Foo; end").to reek`
+      #
+      # source - One of File|IO|String
+      #
+      # Returns an instance of SourceCode
       def self.from(source)
         case source
         when File   then new(source.read, source.path)
