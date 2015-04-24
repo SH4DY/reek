@@ -21,10 +21,10 @@ module Reek
         when Array
           new 'dir', Source::SourceLocator.new(source).sources
         when Source::SourceCode
-          new source.desc, [source]
+          new source.description, [source]
         else
           src = Source::SourceCode.from source
-          new src.desc, [src]
+          new src.description, [src]
         end
       end
 

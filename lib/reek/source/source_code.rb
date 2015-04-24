@@ -11,12 +11,17 @@ module Reek
     # A +Source+ object represents a chunk of Ruby source code.
     #
     class SourceCode
-      attr_reader :desc
+      attr_reader :description
 
-      def initialize(code, desc, parser = Parser::Ruby21)
-        @source = code
-        @desc = desc
-        @parser = parser
+      # Initializer.
+      #
+      # code        - ruby code as String
+      # description - in case of STDIN this is "STDIN" otherwise it's a filepath as String
+      # parser      - the parser to use for generating AST's out of the given source
+      def initialize(code, description, parser = Parser::Ruby21)
+        @source      = code
+        @description = description
+        @parser      = parser
       end
 
       def self.from(source)
@@ -31,9 +36,9 @@ module Reek
         @syntax_tree ||=
           begin
             begin
-              ast, comments = @parser.parse_with_comments(@source, @desc)
+              ast, comments = @parser.parse_with_comments(@source, @description)
             rescue Racc::ParseError, Parser::SyntaxError => error
-              $stderr.puts "#{desc}: #{error.class.name}: #{error}"
+              $stderr.puts "#{description}: #{error.class.name}: #{error}"
             end
 
             comment_map = Parser::Source::Comment.associate(ast, comments) if ast
