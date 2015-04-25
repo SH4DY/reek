@@ -5,17 +5,6 @@ module Reek
     # syntax tree more easily.
     #
     module SexpNode
-      def self.format(expr)
-        case expr
-        when AST::Node then expr.format_ruby
-        else expr.to_s
-        end
-      end
-
-      def hash
-        inspect.hash
-      end
-
       def each_node(type, ignoring = [], &blk)
         if block_given?
           look_for(type, ignoring, &blk)

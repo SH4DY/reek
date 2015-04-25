@@ -9,6 +9,11 @@ module Reek
     # Formats snippets of syntax tree back into Ruby source code.
     #
     class SexpFormatter
+      # Formats the given sexp.
+      #
+      # sexp - S-expression of type AST::Node
+      #
+      # Returns a formatted string representation.
       def self.format(sexp)
         return sexp.to_s unless sexp.is_a? AST::Node
         lines = Unparser.unparse(sexp).split "\n"
